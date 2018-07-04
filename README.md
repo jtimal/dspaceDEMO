@@ -55,4 +55,4 @@ The full license is available at http://www.dspace.org/license/
 
 ## Extras
 
-Esta es una modificación para uso personal del software DSpace. No está relacionada directamente con el proyecto de DURASPACE,
+Esta es una modificación para uso personal del software DSpace. No está relacionada directamente con el proyecto de DURASPACE.
