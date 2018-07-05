@@ -169,7 +169,7 @@
         vocabularyDivision.setAttribute('class', 'vocabulary-node-icon '  + vocabularyTypeClass);
         listItem.appendChild(vocabularyDivision);
         var link = document.createElement('a');
-        link.setAttribute('href', data.value);
+        link.setAttribute('href', data.value + '//' + data.ids);
         //Also store a to lower cased value of our label in the link, this will be used for filtering
         link.setAttribute('filter', data.value.toLowerCase());
         link.innerHTML = data.label;
