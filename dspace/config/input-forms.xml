@@ -169,6 +169,17 @@ it, please enter the types and the actual numbers or codes.</hint>
 
        <field>
          <dc-schema>dc</dc-schema>
+         <dc-element>identificator</dc-element>
+         <dc-qualifier></dc-qualifier>
+         <repeatable>false</repeatable>
+         <label>Identificador</label>
+         <input-type>onebox</input-type>
+         <hint></hint>
+         <required></required>
+       </field>
+
+       <field>
+         <dc-schema>dc</dc-schema>
          <dc-element>description</dc-element>
          <dc-qualifier>abstract</dc-qualifier>
          <repeatable>false</repeatable>

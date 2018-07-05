@@ -105,7 +105,11 @@
                                 vocabularyDialog.find('a').click(function(){
                                     var $this = $(this);
                                     var inputFieldName = vocabularyDialog.find('input[type="hidden"][name="metadataFieldName"]').val();
-                                    $('input[name="' + inputFieldName + '"]').val($this.attr('href'));
+                                    //$('input[name="' + inputFieldName + '"]').val($this.attr('href'));
+                                    var arr = $this.attr('href').split('//');
+
+                                    $('input[name="' + inputFieldName + '"]').val(arr[0]);
+                                    $('input:text[name="dc_identificator"]').vall(arr[1]);
 
                                     //Close the current dialog
                                     vocabularyDialog.dialog("close");
