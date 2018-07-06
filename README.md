@@ -1,8 +1,6 @@
 
 # DSpace
 
-[![Build Status](https://travis-ci.org/DSpace/DSpace.png?branch=master)](https://travis-ci.org/DSpace/DSpace)
-
 [DSpace Documentation](https://wiki.duraspace.org/display/DSDOC/) |
 [DSpace Releases](https://github.com/DSpace/DSpace/releases) |
 [DSpace Wiki](https://wiki.duraspace.org/display/DSPACE/Home) |
@@ -43,10 +41,6 @@ We also encourage GitHub Pull Requests (PRs) at any time. Please see our [Develo
 
 In addition, a listing of all known contributors to DSpace software can be
 found online at: https://wiki.duraspace.org/display/DSPACE/DSpaceContributors
-
-## Issue Tracker
-
-The DSpace Issue Tracker can be found at: https://jira.duraspace.org/projects/DS/summary
 
 ## License
 
