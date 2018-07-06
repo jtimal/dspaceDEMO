@@ -103,7 +103,6 @@ function WriteJson2(JsonArray){
         '<table id = "TablaDatos" class="TablaDatos col-xs-12" type="display">'+
           '<thead>'+
             '<tr>'+
-              //'<th></th>'+
               '<th>Apellidos</th>'+
               '<th>Nombre</th>'+
               '<th>Correo</th>'+
