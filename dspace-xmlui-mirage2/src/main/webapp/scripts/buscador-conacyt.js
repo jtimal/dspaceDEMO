@@ -10,7 +10,7 @@ var content;
 var campo;
 
 //Funcion Iniciadora
-function AuthorLookup(Parametro1,Parametro2,Parametro3) {
+function AuthorLookup(p1, p2, p3) {
 //    TODO i18n
     campo = Parametro2;
     content =   $(        '<div class="modal fade" id="modal1">'+
@@ -47,8 +47,8 @@ function AuthorLookup(Parametro1,Parametro2,Parametro3) {
 function Start_QueryPL(){
   var _nombre = content.find("#FirstName").val();
   var _apellidos = content.find("#LastName").val();
-  var url = CleanQuery(_nombre,_apellidos);
-  Get_Query2(url);
+  var url = Query_NM(_nombre,_apellidos);
+  Get_Query(url);
 }
 
 
@@ -57,7 +57,7 @@ function createCORSRequest(method, url) {
   var xhr = new XMLHttpRequest();
   if ("withCredentials" in xhr) {
     // XHR for Chrome/Firefox/Opera/Safari.
-    xhr.open(method, url, true, "imta", "imTAt05_06");
+    xhr.open(method, url, true, "user", "pass");
   } else if (typeof XDomainRequest != "undefined") {
     // XDomainRequest for IE.
     xhr = new XDomainRequest();
@@ -71,7 +71,7 @@ function createCORSRequest(method, url) {
 
 
 //Funcion que crea la consulta CORS
-function Get_Query2(url) {
+function Get_Query(url) {
   // This is a sample server that supports CORS.
   var xhr = createCORSRequest('GET', url);
   if (!xhr) {
@@ -155,8 +155,8 @@ function Format(JsonElement) {
   } else if(JsonElement.curp){
     _response.push(JsonElement.curp);
     _response.push(2);
-  } else if (JsonElement.orcid) {
-    _response.push(JsonElement.orcid);
+  } else if (JsonElement.idOrcid) {
+    _response.push(JsonElement.idOrcid);
     _response.push(3);
   } else if (JsonElement.dni) {
     _response.push(JsonElement.dni);
@@ -261,7 +261,7 @@ function PutValues(_campo, _dato1, _dato2, _dato3) {
 *solo deja letras y espacios
 *regresan la url*/
 
-function CleanQuery(nombre, apellidos) {
+function Query_NM(nombre, apellidos) {
   var re = /[^A-Za-zÀ-ÿ\s\'\-\_\.]/g;
   //quita caracteres extraños
   nombre = nombre.trim().replace(re,"");
@@ -269,7 +269,5 @@ function CleanQuery(nombre, apellidos) {
   //Reemplaza espacios
   nombre = nombre.replace(" ","%20");
   apellidos = apellidos.replace(" ","%20");
-  console.log(nombre);
-  console.log(apellidos);
   return "http://catalogs.repositorionacionalcti.mx/webresources/persona/byNombreCompleto/params;nombre="+nombre+"%20"+apellidos;
 }
