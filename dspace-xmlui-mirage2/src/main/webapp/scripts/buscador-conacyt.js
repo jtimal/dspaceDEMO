@@ -12,7 +12,7 @@ var campo;
 //Funcion Iniciadora
 function AuthorLookup(p1, p2, p3) {
 //    TODO i18n
-    campo = Parametro2;
+    campo = p2;
     content =   $(        '<div class="modal fade" id="modal1">'+
                               '<div class="modal-dialog modal-lg">'+
                                 '<div class="modal-content">'+
