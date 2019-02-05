@@ -57,7 +57,7 @@ function createCORSRequest(method, url) {
   var xhr = new XMLHttpRequest();
   if ("withCredentials" in xhr) {
     // XHR for Chrome/Firefox/Opera/Safari.
-    xhr.open(method, url, true, "user", "pass");
+    xhr.open(method, url, true, "User", "Password");
   } else if (typeof XDomainRequest != "undefined") {
     // XDomainRequest for IE.
     xhr = new XDomainRequest();
@@ -152,6 +152,9 @@ function Format(JsonElement) {
   if (JsonElement.idCvuConacyt){
     _response.push(JsonElement.idCvuConacyt);
     _response.push(1);
+  } else if (JsonElement.idIdentificadorCa){
+    _response.push(JsonElement.idIdentificadorCa);
+    _response.push(6);
   } else if(JsonElement.curp){
     _response.push(JsonElement.curp);
     _response.push(2);
@@ -236,6 +239,9 @@ function SetPreview(ArrayDatos){
     case "5":
       return [ArrayDatos[0]+", "+ArrayDatos[1]+";;"+ArrayDatos[3], ArrayDatos[0], ArrayDatos[1]+";;"+ArrayDatos[3], ArrayDatos[1]];
       break;
+    case "6":
+      return [ArrayDatos[0]+", "+ArrayDatos[1]+";*"+ArrayDatos[3], ArrayDatos[0], ArrayDatos[1]+";*"+ArrayDatos[3], ArrayDatos[1]];
+      break;
     default:
       return [ArrayDatos[0]+", "+ArrayDatos[1]+";?"+ArrayDatos[3], ArrayDatos[0], ArrayDatos[1]+";?"+ArrayDatos[3], ArrayDatos[1]];
   }
@@ -243,14 +249,40 @@ function SetPreview(ArrayDatos){
 
 //Fuuncion que coloca valores en el formulario
 function PutValues(_campo, _dato1, _dato2, _dato3) {
+  /*
+  function CapitalNames(texto) {
+    const re = /(^|[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ])(?:([a-záéíóúüñ])|([A-ZÁÉÍÓÚÜÑ]))|([A-ZÁÉÍÓÚÜÑ]+)/gu;
+    return texto.replace(re,
+        (m, caracterPrevio, minuscInicial, mayuscInicial, mayuscIntermedias) => {
+            const locale = ['es', 'gl', 'ca', 'pt', 'en'];
+            if (mayuscIntermedias)
+                return mayuscIntermedias.toLocaleLowerCase(locale);
+            return caracterPrevio
+                 + (minuscInicial ? minuscInicial.toLocaleUpperCase(locale) : mayuscInicial);
+        }
+    );
+  }
+  */
+  function CapitalNames(texto) {
+    const re = /(^|[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ])(?:([a-záéíóúüñ])|([A-ZÁÉÍÓÚÜÑ]))|([A-ZÁÉÍÓÚÜÑ]+)/gu;
+    return texto.replace(re, function (m, caracterPrevio, minuscInicial, mayuscInicial, mayuscIntermedias) {
+      const locale = ['es', 'gl', 'ca', 'pt', 'en'];
+      if (mayuscIntermedias)
+          return mayuscIntermedias.toLocaleLowerCase(locale);
+      return caracterPrevio
+           + (minuscInicial ? minuscInicial.toLocaleUpperCase(locale) : mayuscInicial);
+    });
+  }
+
+
   if (_campo.startsWith("value_")){
     window.parent.document.getElementsByName(_campo)[0].value = _dato1+", "+_dato2
   } else{
     window.parent.document.getElementsByName(_campo+"_first")[0].value = _dato2;
     window.parent.document.getElementsByName(_campo+"_last")[0].value = _dato1;
     if (_campo.localeCompare("dc_creator")==0) {
-      window.parent.document.getElementsByName("dc_contributor_author_first")[0].value = _dato3;
-      window.parent.document.getElementsByName("dc_contributor_author_last")[0].value = _dato1;
+      window.parent.document.getElementsByName("dc_contributor_author_first")[0].value = CapitalNames(_dato3);
+      window.parent.document.getElementsByName("dc_contributor_author_last")[0].value = CapitalNames(_dato1);
     }
   }
   content.modal('hide');
